@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{nhanvien/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh Sửa Nhân Viên</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1 class="mb-4">Chỉnh Sửa Nhân Viên</h1>
+    <form th:action="@{/nhanvien/edit/{id}(id=${nhanVien.ma_NV})}" th:object="${nhanVien}" method="post">
+        <div class="form-group">
+            <label>Mã NV</label>
+            <input type="text" th:field="*{ma_NV}" class="form-control" readonly/>
+        </div>
+        <div class="form-group">
+            <label>Tên NV</label>
+            <input type="text" th:field="*{ten_NV}" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Phái</label>
+            <input type="text" th:field="*{phai}" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Nơi Sinh</label>
+            <input type="text" th:field="*{noi_Sinh}" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Mã Phòng</label>
+            <select th:field="*{phongBan.ma_Phong}" class="form-control">
+                <option th:each="phongBan : ${phongBans}" th:value="${phongBan.ma_Phong}" th:text="${phongBan.ten_Phong}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Lương</label>
+            <input type="number" th:field="*{luong}" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <a th:href="@{/nhanvien}" class="btn btn-secondary ml-2">Hủy</a>
+    </form>
+</section>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{nhanvien/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Nhân Viên</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1 class="mb-4">Danh Sách Nhân Viên</h1>
+    <a th:href="@{/nhanvien/add}" class="btn btn-primary mb-3">Thêm Nhân Viên</a>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+        <tr>
+            <th>Mã NV</th>
+            <th>Tên NV</th>
+            <th>Phái</th>
+            <th>Nơi Sinh</th>
+            <th>Mã Phòng</th>
+            <th>Lương</th>
+            <th>Hành Động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nhanVien : ${nhanViens}">
+            <td th:text="${nhanVien.ma_NV}"></td>
+            <td th:text="${nhanVien.ten_NV}"></td>
+            <td>
+                <div class="form-group" th:if="${nhanVien.phai eq 'Nam'}">
+                    <img src="/images/Nam.png" alt="Nam" class="img-thumbnail"/>
+                </div>
+                <div class="form-group" th:if="${nhanVien.phai eq 'Nữ'}">
+                    <img src="/images/Nu.png" alt="Nữ" class="img-thumbnail"/>
+                </div>
+            </td>
+            <td th:text="${nhanVien.noi_Sinh}"></td>
+            <td th:text="${nhanVien.phongBan.ma_Phong}"></td>
+            <td th:text="${nhanVien.luong}"></td>
+            <td>
+                <a th:href="@{/nhanvien/edit/{id}(id=${nhanVien.ma_NV})}" class="btn btn-warning btn-sm">Sửa</a>
+                <a th:href="@{/nhanvien/delete/{id}(id=${nhanVien.ma_NV})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">Xóa</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
